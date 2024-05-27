@@ -18,7 +18,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity2 extends AppCompatActivity {
+public class actLogin extends AppCompatActivity {
 
     private EditText edtEmail;
     private EditText edtPassword;
@@ -52,7 +52,7 @@ public class MainActivity2 extends AppCompatActivity {
                 String password = edtPassword.getText().toString().trim();
 
                 if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(MainActivity2.this, "Por favor, ingrese ambos campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(actLogin.this, "Por favor, ingrese ambos campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -66,19 +66,19 @@ public class MainActivity2 extends AppCompatActivity {
                             edtPassword.getText().clear();
                             String tokenInter = response.body().getToken();
 
-                            Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                            Intent intent = new Intent(actLogin.this, actPrincipalUser.class);
                             intent.putExtra("token", tokenInter);
                             startActivity(intent);
 
-                            Toast.makeText(MainActivity2.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(MainActivity2.this, "Error en las credenciales", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(actLogin.this, "Error en las credenciales", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(MainActivity2.this, "LO SENTIMOS HUBO UN ERROR, INTENTELO DE NUEVO", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(actLogin.this, "LO SENTIMOS HUBO UN ERROR, INTENTELO DE NUEVO", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
