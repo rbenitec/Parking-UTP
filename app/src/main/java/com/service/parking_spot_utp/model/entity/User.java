@@ -8,6 +8,8 @@ public class User {
     public String password;
     public String message;
 
+    public String placa1;
+
 
     public boolean isValid() {
         return valid;
@@ -41,10 +43,19 @@ public class User {
         this.message = message;
     }
 
-    public User(boolean valid, String username, String password, String message) {
+    public String getPlaca1() {
+        return placa1;
+    }
+
+    public void setPlaca1(String placa1) {
+        this.placa1 = placa1;
+    }
+
+    public User(boolean valid, String username, String password, String message, String placa1) {
         this.valid = valid;
         this.username = username;
         this.password = password;
         this.message = message;
+        this.placa1 = placa1;
     }
 }
