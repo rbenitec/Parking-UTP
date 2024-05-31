@@ -1,0 +1,103 @@
+Index: app/src/main/java/com/service/parking_spot_utp/ApiLogin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.service.parking_spot_utp;\r\n\r\nimport retrofit2.Call;\r\nimport retrofit2.http.Field;\r\nimport retrofit2.http.FormUrlEncoded;\r\nimport retrofit2.http.GET;\r\nimport retrofit2.http.POST;\r\nimport retrofit2.http.Path;\r\npublic interface ApiLogin {\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"login\")\r\n    Call<User>LOGIN_CALL(\r\n            @Field(\"email\") String email,\r\n            @Field(\"password\") String password\r\n\r\n    );\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/service/parking_spot_utp/ApiLogin.java b/app/src/main/java/com/service/parking_spot_utp/ApiLogin.java
+--- a/app/src/main/java/com/service/parking_spot_utp/ApiLogin.java	(revision ac9e8d87644af27545906e1146c5a7252f043406)
++++ b/app/src/main/java/com/service/parking_spot_utp/ApiLogin.java	(date 1717108595037)
+@@ -11,7 +11,7 @@
+     @FormUrlEncoded
+     @POST("login")
+     Call<User>LOGIN_CALL(
+-            @Field("email") String email,
++            @Field("email") String username,
+             @Field("password") String password
+ 
+     );
+Index: app/src/main/java/com/service/parking_spot_utp/actLogin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.service.parking_spot_utp;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport okhttp3.OkHttpClient;\r\nimport okhttp3.logging.HttpLoggingInterceptor;\r\nimport retrofit2.Call;\r\nimport retrofit2.Callback;\r\nimport retrofit2.Response;\r\nimport retrofit2.Retrofit;\r\nimport retrofit2.converter.gson.GsonConverterFactory;\r\n\r\npublic class actLogin extends AppCompatActivity {\r\n\r\n    private EditText edtEmail;\r\n    private EditText edtPassword;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_main2);\r\n\r\n        edtEmail = findViewById(R.id.email);\r\n        edtPassword = findViewById(R.id.password);\r\n        Button btn_login = findViewById(R.id.loginButton);\r\n\r\n        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();\r\n        logging.setLevel(HttpLoggingInterceptor.Level.BODY);\r\n\r\n        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();\r\n        httpClient.addInterceptor(logging);\r\n\r\n        Retrofit retrofit = new Retrofit.Builder()\r\n                .baseUrl(\"http://localhost:8110/\")\r\n                .addConverterFactory(GsonConverterFactory.create())\r\n                .client(httpClient.build())\r\n                .build();\r\n\r\n        btn_login.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String email = edtEmail.getText().toString().trim();\r\n                String password = edtPassword.getText().toString().trim();\r\n\r\n                if (email.isEmpty() || password.isEmpty()) {\r\n                    Toast.makeText(actLogin.this, \"Por favor, ingrese ambos campos\", Toast.LENGTH_SHORT).show();\r\n                    return;\r\n                }\r\n\r\n                ApiLogin login = retrofit.create(ApiLogin.class);\r\n                Call<User> call = login.LOGIN_CALL(email, password);\r\n                call.enqueue(new Callback<User>() {\r\n                    @Override\r\n                    public void onResponse(Call<User> call, Response<User> response) {\r\n                        if (response.isSuccessful() && response.body() != null) {\r\n                            edtEmail.getText().clear();\r\n                            edtPassword.getText().clear();\r\n                            String tokenInter = response.body().getToken();\r\n\r\n                            Intent intent = new Intent(actLogin.this, actPrincipalUser.class);\r\n                            intent.putExtra(\"token\", tokenInter);\r\n                            startActivity(intent);\r\n\r\n                            Toast.makeText(actLogin.this, \"Bienvenido\", Toast.LENGTH_SHORT).show();\r\n                        } else {\r\n                            Toast.makeText(actLogin.this, \"Error en las credenciales\", Toast.LENGTH_SHORT).show();\r\n                        }\r\n                    }\r\n\r\n                    @Override\r\n                    public void onFailure(Call<User> call, Throwable t) {\r\n                        Toast.makeText(actLogin.this, \"LO SENTIMOS HUBO UN ERROR, INTENTELO DE NUEVO\", Toast.LENGTH_SHORT).show();\r\n                    }\r\n                });\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/service/parking_spot_utp/actLogin.java b/app/src/main/java/com/service/parking_spot_utp/actLogin.java
+--- a/app/src/main/java/com/service/parking_spot_utp/actLogin.java	(revision ac9e8d87644af27545906e1146c5a7252f043406)
++++ b/app/src/main/java/com/service/parking_spot_utp/actLogin.java	(date 1717108540206)
+@@ -64,10 +64,8 @@
+                         if (response.isSuccessful() && response.body() != null) {
+                             edtEmail.getText().clear();
+                             edtPassword.getText().clear();
+-                            String tokenInter = response.body().getToken();
+ 
+                             Intent intent = new Intent(actLogin.this, actPrincipalUser.class);
+-                            intent.putExtra("token", tokenInter);
+                             startActivity(intent);
+ 
+                             Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+Index: app/src/main/java/com/service/parking_spot_utp/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.service.parking_spot_utp;\r\n\r\npublic class User {\r\n    public String email;\r\n    public String passworwd;\r\n\r\n    public String token;\r\n\r\n\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    public void setEmail(String email) {\r\n        this.email = email;\r\n    }\r\n\r\n    public String getPassworwd() {\r\n        return passworwd;\r\n    }\r\n\r\n    public void setPassworwd(String passworwd) {\r\n        this.passworwd = passworwd;\r\n    }\r\n\r\n    public String getToken() {\r\n        return token;\r\n    }\r\n\r\n    public void setToken(String token) {\r\n        this.token = token;\r\n    }\r\n\r\n    public User(String email, String passworwd, String token) {\r\n        this.email = email;\r\n        this.passworwd = passworwd;\r\n        this.token = token;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/service/parking_spot_utp/User.java b/app/src/main/java/com/service/parking_spot_utp/User.java
+--- a/app/src/main/java/com/service/parking_spot_utp/User.java	(revision ac9e8d87644af27545906e1146c5a7252f043406)
++++ b/app/src/main/java/com/service/parking_spot_utp/User.java	(date 1717108531242)
+@@ -1,39 +1,27 @@
+ package com.service.parking_spot_utp;
+ 
+ public class User {
+-    public String email;
+-    public String passworwd;
+-
+-    public String token;
+-
+-
+-    public String getEmail() {
+-        return email;
+-    }
++    public String username;
++    public String password;
+ 
+-    public void setEmail(String email) {
+-        this.email = email;
++    public String getUsername() {
++        return username;
+     }
+ 
+-    public String getPassworwd() {
+-        return passworwd;
++    public void setUsername(String username) {
++        this.username = username;
+     }
+ 
+-    public void setPassworwd(String passworwd) {
+-        this.passworwd = passworwd;
++    public String getPassword() {
++        return password;
+     }
+ 
+-    public String getToken() {
+-        return token;
++    public void setPassword(String password) {
++        this.password = password;
+     }
+ 
+-    public void setToken(String token) {
+-        this.token = token;
+-    }
+-
+-    public User(String email, String passworwd, String token) {
+-        this.email = email;
+-        this.passworwd = passworwd;
+-        this.token = token;
++    public User(String username, String password) {
++        this.username = username;
++        this.password = password;
+     }
+ }
