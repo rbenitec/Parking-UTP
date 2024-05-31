@@ -1,8 +1,10 @@
-package com.service.parking_spot_utp;
+package com.service.parking_spot_utp.view;
 
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.service.parking_spot_utp.R;
 
 public class actPrincipalUser extends AppCompatActivity {
 

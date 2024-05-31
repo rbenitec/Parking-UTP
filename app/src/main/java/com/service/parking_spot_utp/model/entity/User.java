@@ -1,4 +1,4 @@
-package com.service.parking_spot_utp;
+package com.service.parking_spot_utp.model.entity;
 
 public class User {
 

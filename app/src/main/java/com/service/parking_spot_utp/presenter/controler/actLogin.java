@@ -1,4 +1,4 @@
-package com.service.parking_spot_utp;
+package com.service.parking_spot_utp.presenter.controler;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.service.parking_spot_utp.R;
+import com.service.parking_spot_utp.presenter.connection.RetrofitClient;
+import com.service.parking_spot_utp.presenter.service.ApiLogin;
+import com.service.parking_spot_utp.view.actPrincipalUser;
+import com.service.parking_spot_utp.model.dto.LoginRequest;
+import com.service.parking_spot_utp.model.entity.User;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -37,11 +45,7 @@ public class actLogin extends AppCompatActivity {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8110/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient.build())
-                .build();
+        Retrofit retrofit = RetrofitClient.getClient();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
