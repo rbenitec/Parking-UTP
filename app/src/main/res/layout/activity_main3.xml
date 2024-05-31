@@ -5,9 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".actPrincipalUser"
-    android:background="@color/sky"
-    >
+    android:background="@color/sky">
 
     <LinearLayout
         android:id="@+id/header"
@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/footer">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,7 +76,6 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
 
                 <TextView
                     android:layout_width="293dp"
@@ -126,8 +125,7 @@
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:textAlignment="center"
-                    />
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="290dp"
@@ -135,8 +133,7 @@
                     android:text="Espacios Disponibles:"
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
-                    android:textAlignment="center"
-                    />
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="290dp"
@@ -145,8 +142,7 @@
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:textAlignment="center"
-                    />
+                    android:textAlignment="center" />
             </LinearLayout>
 
         </LinearLayout>
@@ -203,7 +199,7 @@
 
     <LinearLayout
         android:id="@+id/footer"
-        android:layout_width="309dp"
+        android:layout_width="0dp"
         android:layout_height="69dp"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_background"
@@ -229,7 +225,6 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:src="@drawable/ic_record" />
 
     </LinearLayout>

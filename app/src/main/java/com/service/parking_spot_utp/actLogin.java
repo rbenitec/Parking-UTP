@@ -2,14 +2,12 @@ package com.service.parking_spot_utp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -20,18 +18,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class actLogin extends AppCompatActivity {
 
-    private EditText edtEmail;
+    private EditText edtUsername;
     private EditText edtPassword;
+    private static final String TAG = "actLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main2);
 
-        edtEmail = findViewById(R.id.email);
+        edtUsername = findViewById(R.id.email);
         edtPassword = findViewById(R.id.password);
-        Button btn_login = findViewById(R.id.loginButton);
+        Button btnLogin = findViewById(R.id.loginButton);
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -40,38 +38,44 @@ public class actLogin extends AppCompatActivity {
         httpClient.addInterceptor(logging);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8110/")
+                .baseUrl("http://10.0.2.2:8110/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = edtEmail.getText().toString().trim();
+                String username = edtUsername.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
 
-                if (email.isEmpty() || password.isEmpty()) {
+                if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(actLogin.this, "Por favor, ingrese ambos campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 ApiLogin login = retrofit.create(ApiLogin.class);
-                Call<User> call = login.LOGIN_CALL(email, password);
+                LoginRequest loginRequest = new LoginRequest(username, password);
+                Call<User> call = login.LOGIN_CALL(loginRequest);
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            edtEmail.getText().clear();
-                            edtPassword.getText().clear();
-                            String tokenInter = response.body().getToken();
+                            User user = response.body();
+                            if (user.isValid()) {
+                                edtUsername.getText().clear();
+                                edtPassword.getText().clear();
 
-                            Intent intent = new Intent(actLogin.this, actPrincipalUser.class);
-                            intent.putExtra("token", tokenInter);
-                            startActivity(intent);
+                                Intent intent = new Intent(actLogin.this, actPrincipalUser.class);
+                                intent.putExtra("username", user.getUsername());
+                                startActivity(intent);
 
-                            Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(actLogin.this, user.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         } else {
+                            Log.d(TAG, "Error en las credenciales: " + response.message());
                             Toast.makeText(actLogin.this, "Error en las credenciales", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -79,6 +83,8 @@ public class actLogin extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Toast.makeText(actLogin.this, "LO SENTIMOS HUBO UN ERROR, INTENTELO DE NUEVO", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Error en la solicitud de login", t);
+                        t.printStackTrace();
                     }
                 });
             }

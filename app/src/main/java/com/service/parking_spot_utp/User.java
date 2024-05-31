@@ -1,39 +1,39 @@
 package com.service.parking_spot_utp;
 
 public class User {
-    public String email;
-    public String passworwd;
 
-    public String token;
+    public boolean valid;
+    public String username;
+    public String message;
 
 
-    public String getEmail() {
-        return email;
+    public boolean isValid() {
+        return valid;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 
-    public String getPassworwd() {
-        return passworwd;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPassworwd(String passworwd) {
-        this.passworwd = passworwd;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getToken() {
-        return token;
+    public String getMessage() {
+        return message;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public User(String email, String passworwd, String token) {
-        this.email = email;
-        this.passworwd = passworwd;
-        this.token = token;
+    public User(boolean valid, String username, String message) {
+        this.valid = valid;
+        this.username = username;
+        this.message = message;
     }
 }
