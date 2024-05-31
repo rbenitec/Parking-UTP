@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Parking_Spot_UTP</string>
+    <string name="registro">Registro</string>
+    <string name="hold">...</string>
+    <string name="registro_ok">Registro</string>
+    <string name="limpiar_datos_button">Limpiar datos</string>
+    <string name="password">Contraseña</string>
 </resources>
