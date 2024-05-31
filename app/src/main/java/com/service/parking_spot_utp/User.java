@@ -4,6 +4,8 @@ public class User {
 
     public boolean valid;
     public String username;
+
+    public String password;
     public String message;
 
 
@@ -23,6 +25,14 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -31,9 +41,10 @@ public class User {
         this.message = message;
     }
 
-    public User(boolean valid, String username, String message) {
+    public User(boolean valid, String username, String password, String message) {
         this.valid = valid;
         this.username = username;
+        this.password = password;
         this.message = message;
     }
 }

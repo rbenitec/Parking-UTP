@@ -68,6 +68,7 @@ public class actLogin extends AppCompatActivity {
 
                                 Intent intent = new Intent(actLogin.this, actPrincipalUser.class);
                                 intent.putExtra("username", user.getUsername());
+                                intent.putExtra("password", user.getPassword());
                                 startActivity(intent);
 
                                 Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
