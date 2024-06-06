@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.service.parking_spot_utp.R;
 import com.service.parking_spot_utp.model.dto.RegisterRequest;
 import com.service.parking_spot_utp.model.entity.User;
+import com.service.parking_spot_utp.model.entity.Vehicle;
 import com.service.parking_spot_utp.presenter.connection.RetrofitClient;
 import com.service.parking_spot_utp.presenter.service.ApiRegister;
 
@@ -40,7 +41,7 @@ public class actRegistro extends AppCompatActivity {
 
         edtUsername = findViewById(R.id.usuario_register);
         edtPassword = findViewById(R.id.password_register);
-        Button btnRegister = findViewById(R.id.registerButton);
+        Button btnRegister = findViewById(R.id.btnRegister);
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -53,6 +54,7 @@ public class actRegistro extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("Llego OnClick");
                 String username = edtUsername.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
                 String plate = edtPlate.getText().toString().trim();
@@ -63,8 +65,12 @@ public class actRegistro extends AppCompatActivity {
                 }
 
                 ApiRegister register = retrofit.create(ApiRegister.class);
-                RegisterRequest RegisterRequest = new RegisterRequest(username, password, plate);
+                Vehicle vehicle= new Vehicle(plate,"BBMW","Auto");
+
+                RegisterRequest RegisterRequest = new RegisterRequest(username, password, vehicle);
+                System.out.println(RegisterRequest);
                 Call<User> call = register.REGISTER_CALL(RegisterRequest);
+
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {

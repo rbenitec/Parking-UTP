@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.service.parking_spot_utp.R;
 import com.service.parking_spot_utp.presenter.connection.RetrofitClient;
 import com.service.parking_spot_utp.presenter.service.ApiLogin;
-import com.service.parking_spot_utp.view.actPrincipalUser;
 import com.service.parking_spot_utp.model.dto.LoginRequest;
 import com.service.parking_spot_utp.model.entity.User;
 
@@ -22,7 +21,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class actLogin extends AppCompatActivity {
 
@@ -75,15 +73,19 @@ public class actLogin extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (response.isSuccessful() && response.body() != null) {
+
                             User user = response.body();
+                            System.out.println(user);
                             if (user.isValid()) {
+
                                 edtUsername.getText().clear();
                                 edtPassword.getText().clear();
 
-                                Intent intent = new Intent(actLogin.this, actPrincipalUser.class);
-                                intent.putExtra("username", user.getUsername());
-                                intent.putExtra("password", user.getPassword());
-                                startActivity(intent);
+                                //intent.putExtra("username", user.getUsername());
+                                //intent.putExtra("password", user.getPassword());
+
+                                startActivity(new Intent(actLogin.this, actPrincipalUser.class));
+
 
                                 Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                             } else {
