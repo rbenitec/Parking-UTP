@@ -42,8 +42,6 @@ public class actPrincipalUser extends AppCompatActivity {
 
         Call<Lista> call = parkingService.getParkingList();
 
-        //Log.d(TAG, call.toString());
-
         call.enqueue(new Callback<Lista>() {
             @Override
             public void onResponse(Call<Lista> call, Response<Lista> response) {
