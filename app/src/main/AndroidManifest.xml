@@ -15,7 +15,16 @@
         android:theme="@style/Theme.Parking_Spot_UTP"
         tools:targetApi="31">
         <activity
+            android:name=".view_search_admin"
+            android:exported="false" />
+        <activity
+            android:name=".main_view_admin"
+            android:exported="false" />
+        <activity
             android:name=".presenter.controler.actPrincipalUser"
+            android:exported="false" />
+        <activity
+            android:name=".presenter.controler.actRegistro"
             android:exported="false" />
         <activity
             android:name=".presenter.controler.actLogin"

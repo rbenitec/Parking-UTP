@@ -50,7 +50,7 @@ public class actLogin extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.register_form);
+                startActivity(new Intent(actLogin.this, actRegistro.class));
             }
         });
 
