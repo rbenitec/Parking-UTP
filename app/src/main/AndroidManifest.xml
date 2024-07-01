@@ -18,13 +18,7 @@
             android:name=".view_search_admin"
             android:exported="false" />
         <activity
-            android:name=".main_view_admin"
-            android:exported="false" />
-        <activity
-            android:name=".presenter.controler.actPrincipalUser"
-            android:exported="false" />
-        <activity
-            android:name=".presenter.controler.actRegistro"
+            android:name=".presenter.controler.actPrincipal"
             android:exported="false" />
         <activity
             android:name=".presenter.controler.actLogin"

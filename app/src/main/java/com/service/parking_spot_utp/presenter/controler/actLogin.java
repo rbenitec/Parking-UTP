@@ -36,7 +36,6 @@ public class actLogin extends AppCompatActivity {
         edtUsername = findViewById(R.id.email);
         edtPassword = findViewById(R.id.password);
         Button btnLogin = findViewById(R.id.loginButton);
-        Button btnRegister = findViewById(R.id.registerButton);
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -45,14 +44,6 @@ public class actLogin extends AppCompatActivity {
         httpClient.addInterceptor(logging);
 
         Retrofit retrofit = RetrofitClient.getClient();
-
-        btnRegister.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(actLogin.this, actRegistro.class));
-            }
-        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +75,7 @@ public class actLogin extends AppCompatActivity {
                                 //intent.putExtra("username", user.getUsername());
                                 //intent.putExtra("password", user.getPassword());
 
-                                startActivity(new Intent(actLogin.this, actPrincipalUser.class));
+                                startActivity(new Intent(actLogin.this, actPrincipal.class));
 
 
                                 Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
