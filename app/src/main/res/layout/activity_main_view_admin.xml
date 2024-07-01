@@ -65,9 +65,10 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/totalSlotsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="150"
+                android:text="Loading..."
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_green_dark"
                 android:textSize="25sp"
@@ -82,6 +83,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/availableSlotsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="20"
@@ -110,6 +112,7 @@
                 android:paddingTop="15dp" />
 
             <TextView
+                android:id="@+id/basementTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="3"
@@ -127,6 +130,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/spaceTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="12"
