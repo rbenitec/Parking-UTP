@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view_search_admin"
+    tools:context=".presenter.controler.actSearch"
     android:background="@color/sky">
 
     <!-- Header -->
@@ -64,10 +64,10 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_search"
             android:background="@drawable/rounded_button_background"
-
             android:padding="10dp"/>
     </LinearLayout>
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/card_background" />
 
-
+    <!-- Footer -->
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="0dp"

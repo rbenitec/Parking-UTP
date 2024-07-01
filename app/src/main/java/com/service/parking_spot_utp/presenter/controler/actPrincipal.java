@@ -3,14 +3,16 @@ package com.service.parking_spot_utp.presenter.controler;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.service.parking_spot_utp.R;
 import com.service.parking_spot_utp.model.entity.ParkingResponse;
-import com.service.parking_spot_utp.presenter.connection.RetrofitClient;
 import com.service.parking_spot_utp.presenter.connection.RetrofitParking;
 import com.service.parking_spot_utp.presenter.service.ApiParking;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -21,6 +23,7 @@ import retrofit2.Retrofit;
 public class actPrincipal extends AppCompatActivity {
 
     private static final String TAG = "actPrincipal";
+    private int idSlot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class actPrincipal extends AppCompatActivity {
         TextView availableSlotsTextView = findViewById(R.id.availableSlotsTextView);
         TextView basementTextView = findViewById(R.id.basementTextView);
         TextView spaceTextView = findViewById(R.id.spaceTextView);
+        Button continuarButton = findViewById(R.id.continuarButton);
 
         Intent intent = getIntent();
         String campus = intent.getStringExtra("campus");
@@ -56,7 +60,10 @@ public class actPrincipal extends AppCompatActivity {
                         totalSlotsTextView.setText(String.valueOf(parkingResponse.getTotalSlots()));
                         availableSlotsTextView.setText(String.valueOf(parkingResponse.getAvailableSlots()));
                         basementTextView.setText(parkingResponse.getBasement());
-                        spaceTextView.setText(String.valueOf(parkingResponse.getSpace()));
+                        spaceTextView.setText(String.valueOf(parkingResponse.getSeries()));
+
+                        // Guardar idSlot
+                        idSlot = parkingResponse.getIdSlot();
                     } else {
                         Log.d(TAG, "Error en la respuesta de la API: " + response.message());
                         Toast.makeText(actPrincipal.this, "Error al obtener la disponibilidad de estacionamientos", Toast.LENGTH_SHORT).show();
@@ -74,5 +81,23 @@ public class actPrincipal extends AppCompatActivity {
             Log.e(TAG, "Campus no recibido desde el intent");
             Toast.makeText(this, "Error al recibir los datos del campus", Toast.LENGTH_SHORT).show();
         }
+
+        // Click
+        continuarButton.setOnClickListener(v -> {
+            if (idSlot != 0) {
+                // Mostrar idSlot en pop-up
+                showIdSlotPopup(idSlot);
+            } else {
+                Toast.makeText(actPrincipal.this, "idSlot no está disponible", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showIdSlotPopup(int idSlot) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ID Slot");
+        builder.setMessage("El ID del slot es: " + idSlot);
+        builder.setPositiveButton("OK", null);
+        builder.show();
     }
 }
