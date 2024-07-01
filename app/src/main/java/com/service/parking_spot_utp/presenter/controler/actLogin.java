@@ -56,7 +56,6 @@ public class actLogin extends AppCompatActivity {
                     return;
                 }
 
-
                 ApiLogin login = retrofit.create(ApiLogin.class);
                 LoginRequest loginRequest = new LoginRequest(username, password);
                 Call<User> call = login.LOGIN_CALL(loginRequest);
@@ -64,19 +63,17 @@ public class actLogin extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (response.isSuccessful() && response.body() != null) {
-
                             User user = response.body();
                             System.out.println(user);
-                            if (user.isValid()) {
 
+                            if (user.isValid()) {
                                 edtUsername.getText().clear();
                                 edtPassword.getText().clear();
 
-                                //intent.putExtra("username", user.getUsername());
-                                //intent.putExtra("password", user.getPassword());
-
-                                startActivity(new Intent(actLogin.this, actPrincipal.class));
-
+                                Intent intent = new Intent(actLogin.this, actPrincipal.class);
+                                intent.putExtra("username", user.getUsername());
+                                intent.putExtra("campus", user.getCampus());
+                                startActivity(intent);
 
                                 Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                             } else {
