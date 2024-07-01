@@ -38,6 +38,7 @@ public class actLogin extends AppCompatActivity {
         edtUsername = findViewById(R.id.email);
         edtPassword = findViewById(R.id.password);
         Button btnLogin = findViewById(R.id.loginButton);
+        Button btnRegister = findViewById(R.id.registerButton);
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -46,6 +47,14 @@ public class actLogin extends AppCompatActivity {
         httpClient.addInterceptor(logging);
 
         Retrofit retrofit = RetrofitClient.getClient();
+
+        btnRegister.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.register_form);
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +66,7 @@ public class actLogin extends AppCompatActivity {
                     Toast.makeText(actLogin.this, "Por favor, ingrese ambos campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
 
                 ApiLogin login = retrofit.create(ApiLogin.class);
                 LoginRequest loginRequest = new LoginRequest(username, password);
