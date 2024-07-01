@@ -8,7 +8,6 @@
     tools:context=".view_search_admin"
     android:background="@color/sky">
 
-
     <!-- Header -->
     <LinearLayout
         android:id="@+id/header"
