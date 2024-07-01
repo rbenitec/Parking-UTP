@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".view.actPrincipalUser"
+    tools:context=".presenter.controler.actPrincipalUser"
     android:background="@color/sky">
 
     <LinearLayout
@@ -86,9 +86,10 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/Arequipa"
                     android:layout_width="291dp"
                     android:layout_height="wrap_content"
-                    android:text="15"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="30sp"
@@ -136,9 +137,10 @@
                     android:textAlignment="center" />
 
                 <TextView
+                    android:id="@+id/Pacifico"
                     android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:text="5"
+                    android:text="-"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -185,10 +187,11 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/Petit"
                     android:layout_width="290dp"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
-                    android:text="1"
+                    android:text="-"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="30sp"
                     android:textStyle="bold" />
