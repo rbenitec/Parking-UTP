@@ -86,7 +86,7 @@
                 android:id="@+id/availableSlotsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="20"
+                android:text="Loading..."
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_green_dark"
                 android:textSize="25sp"
@@ -115,7 +115,7 @@
                 android:id="@+id/basementTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3"
+                android:text="Loading..."
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_green_dark"
                 android:textSize="25sp"
@@ -133,7 +133,7 @@
                 android:id="@+id/spaceTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="12"
+                android:text="Loading..."
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_green_dark"
                 android:textSize="25sp"
@@ -144,7 +144,7 @@
                 android:layout_width="279dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:backgroundTint="@color/softblue"
+                android:backgroundTint="@color/verde_oscuro"
                 android:text="Continuar"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center" />
@@ -173,9 +173,10 @@
             android:src="@drawable/ic_calendar" />
 
         <ImageView
+            android:id="@+id/searchImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_record" />
+            android:src="@drawable/ic_search" />
 
     </LinearLayout>
 
