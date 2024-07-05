@@ -30,7 +30,6 @@ public class actSearch extends AppCompatActivity {
     private List<ticketResponse> ticketList;
     private ApiSearch apiService;
     private EditText plateNumberEditText;
-    private ImageButton searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class actSearch extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         plateNumberEditText = findViewById(R.id.plate_number);
-        searchButton = findViewById(R.id.search_button);
+        ImageButton searchButton = findViewById(R.id.search_button);
 
         // Initialize Retrofit
         apiService = RetrofitParking.getParking().create(ApiSearch.class);
