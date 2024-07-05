@@ -15,8 +15,8 @@ import com.service.parking_spot_utp.R;
 import com.service.parking_spot_utp.model.dto.ParkingTicketDto;
 import com.service.parking_spot_utp.model.entity.QRResponse;
 import com.service.parking_spot_utp.model.entity.ticketGenerated;
-import com.service.parking_spot_utp.presenter.service.ApiTicket;
 import com.service.parking_spot_utp.presenter.connection.RetrofitClient;
+import com.service.parking_spot_utp.presenter.service.ApiTicket;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +26,8 @@ import retrofit2.Retrofit;
 public class actQR extends AppCompatActivity {
 
     private int idSlot;
+    private String basement;
+    private String space;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class actQR extends AppCompatActivity {
         setContentView(R.layout.activity_qr_view);
 
         idSlot = getIntent().getIntExtra("idSlot", 0);
+        basement = getIntent().getStringExtra("basement");
+        space = getIntent().getStringExtra("space");
 
         TextView idSlotTextView = findViewById(R.id.idSlotTextView);
         idSlotTextView.setText("ID del Slot: " + idSlot);
@@ -96,6 +100,8 @@ public class actQR extends AppCompatActivity {
                         intent.putExtra("parkingDTO", parkingDTO);
                         intent.putExtra("fullName", qrResponse.getClient().getNames() + " " + qrResponse.getClient().getLastname());
                         intent.putExtra("ticketNumber", apiResponseTicketGenerado.getTicketNumber());
+                        intent.putExtra("basement", basement);
+                        intent.putExtra("space", space);
                         startActivity(intent);
                     } else {
                         Toast.makeText(actQR.this, "Error al crear ticket", Toast.LENGTH_LONG).show();

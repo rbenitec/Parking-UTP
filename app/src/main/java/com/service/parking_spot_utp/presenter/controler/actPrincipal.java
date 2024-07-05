@@ -122,6 +122,8 @@ public class actPrincipal extends AppCompatActivity {
             // Acción de confirmación
             Intent intent = new Intent(actPrincipal.this, actQR.class);
             intent.putExtra("idSlot", idSlot);
+            intent.putExtra("basement", basement);
+            intent.putExtra("space", space);
             startActivity(intent);
             dialog.dismiss();
         });
