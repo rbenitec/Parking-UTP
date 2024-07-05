@@ -4,6 +4,209 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.controler.actTicketConfirmed">
+    android:background="#E6F0F8">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="99dp"
+            android:layout_height="86dp"
+            android:src="@drawable/ic_car" />
+
+        <TextView
+            android:layout_width="268dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="Confirmación"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="333dp"
+        android:layout_height="498dp"
+        android:background="@drawable/card_background"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="145dp">
+
+        <TextView
+            android:id="@+id/txtExito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="¡Ticket generado exitosamente!"
+            android:textAlignment="center"
+            android:textColor="#8BC34A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="280dp"
+            android:layout_height="109dp"
+            app:srcCompat="@drawable/ic_ticket" />
+
+        <TextView
+            android:id="@+id/ticket"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="#230122"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtAsignado"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Espacio asignado a: "
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/personaAsig"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="APELLIDOS, NOMBRES"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="237dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tituSot"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="SOTANO N°"
+                android:textAlignment="center"
+                android:textColor="#717171"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/numSotano"
+                android:layout_width="84dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="23"
+                android:textAlignment="center"
+                android:textColor="#377F7F"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="237dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tituEspacio"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="ESPACIO N°"
+                android:textAlignment="center"
+                android:textColor="#717171"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/numEspacio"
+                android:layout_width="84dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="23"
+                android:textAlignment="center"
+                android:textColor="#377F7F"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/horaTxt"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Hora de registro:"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/pregTxt"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="13:00"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fechaTxt"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Fecha de registro:"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="17/06/2024"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAceptar"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#377F7F"
+            android:text="Aceptar" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
