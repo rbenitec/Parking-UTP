@@ -126,6 +126,5 @@ public class QRResponse {
             this.type = type;
         }
 
-        // Getters and setters
     }
 }

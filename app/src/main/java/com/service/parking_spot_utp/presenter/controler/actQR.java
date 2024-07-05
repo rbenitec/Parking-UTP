@@ -15,7 +15,7 @@ import com.service.parking_spot_utp.R;
 import com.service.parking_spot_utp.model.dto.ParkingTicketDto;
 import com.service.parking_spot_utp.model.entity.QRResponse;
 import com.service.parking_spot_utp.model.entity.ticketGenerated;
-import com.service.parking_spot_utp.presenter.connection.RetrofitClient;
+import com.service.parking_spot_utp.presenter.connection.RetrofitTicket;
 import com.service.parking_spot_utp.presenter.service.ApiTicket;
 
 import retrofit2.Call;
@@ -72,7 +72,7 @@ public class actQR extends AppCompatActivity {
                 QRResponse qrResponse = gson.fromJson(result.getContents(), QRResponse.class);
 
                 // Crear DTO
-                ParkingTicketDto parkingDTO = new ParkingTicketDto(qrResponse.getClient().getUsername(), qrResponse.getClient().getId(), idSlot);
+                ParkingTicketDto parkingDTO = new ParkingTicketDto(qrResponse.getClient().getUsername(), idSlot);
 
                 // Enviar datos a la API
                 sendParkingTicketToApi(parkingDTO, qrResponse);
@@ -83,23 +83,27 @@ public class actQR extends AppCompatActivity {
     }
 
     private void sendParkingTicketToApi(ParkingTicketDto parkingDTO, QRResponse qrResponse) {
-        Retrofit retrofit = RetrofitClient.getClient();
+        Retrofit retrofit = RetrofitTicket.getClient();
         ApiTicket apiService = retrofit.create(ApiTicket.class);
 
+        System.out.println(parkingDTO.toString());
         Call<ticketGenerated> call = apiService.createParkingTicket(parkingDTO);
         call.enqueue(new Callback<ticketGenerated>() {
             @Override
             public void onResponse(Call<ticketGenerated> call, Response<ticketGenerated> response) {
+                System.out.println("Obteniendo respuesta del ticket");
+                System.out.println(response);
                 if (response.isSuccessful() && response.body() != null) {
+                    System.out.println("Conexion y cuerpo no nulo");
                     ticketGenerated apiResponseTicketGenerado = response.body();
-                    if (apiResponseTicketGenerado.getTicketNumber() != null) {
+                    if (apiResponseTicketGenerado.getBody() != null && apiResponseTicketGenerado.getBody().getTicketNumber() != null) {
                         Toast.makeText(actQR.this, "Ticket creado exitosamente", Toast.LENGTH_LONG).show();
 
                         // Enviar datos a la siguiente vista
                         Intent intent = new Intent(actQR.this, actTicketConfirmed.class);
                         intent.putExtra("parkingDTO", parkingDTO);
                         intent.putExtra("fullName", qrResponse.getClient().getNames() + " " + qrResponse.getClient().getLastname());
-                        intent.putExtra("ticketNumber", apiResponseTicketGenerado.getTicketNumber());
+                        intent.putExtra("ticketNumber", apiResponseTicketGenerado.getBody().getTicketNumber());
                         intent.putExtra("basement", basement);
                         intent.putExtra("space", space);
                         startActivity(intent);

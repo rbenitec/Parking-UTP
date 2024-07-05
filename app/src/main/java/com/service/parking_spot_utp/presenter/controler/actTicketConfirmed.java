@@ -2,6 +2,7 @@ package com.service.parking_spot_utp.presenter.controler;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,11 +25,12 @@ public class actTicketConfirmed extends AppCompatActivity {
         TextView basementTextView = findViewById(R.id.numSotano);
         TextView horaTextView = findViewById(R.id.horaRegistro);
         TextView fechaTextView = findViewById(R.id.fecha);
+        Button btnAceptar = findViewById(R.id.btnAceptar);
 
         Intent intent = getIntent();
         ParkingTicketDto parkingDTO = (ParkingTicketDto) intent.getSerializableExtra("parkingDTO");
         String fullName = intent.getStringExtra("fullName");
-        Integer ticketNumber = intent.getIntExtra("ticketNumber", 0);
+        int ticketNumber = intent.getIntExtra("ticketNumber", 0);
         String basement = intent.getStringExtra("basement");
         String space = intent.getStringExtra("space");
 
@@ -48,5 +50,10 @@ public class actTicketConfirmed extends AppCompatActivity {
             horaTextView.setText(currentTime);
             fechaTextView.setText(currentDate);
         }
+
+        btnAceptar.setOnClickListener(v -> {
+            Intent newIntent = new Intent(actTicketConfirmed.this, actPrincipal.class);
+            startActivity(newIntent);
+        });
     }
 }

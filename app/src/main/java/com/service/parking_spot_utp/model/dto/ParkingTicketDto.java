@@ -5,12 +5,10 @@ import java.io.Serializable;
 public class ParkingTicketDto implements Serializable {
 
     private String username;
-    private Integer accountId;
     private Integer placeId;
 
-    public ParkingTicketDto(String username, Integer accountId, Integer placeId) {
+    public ParkingTicketDto(String username, Integer placeId) {
         this.username = username;
-        this.accountId = accountId;
         this.placeId = placeId;
     }
 
@@ -22,20 +20,20 @@ public class ParkingTicketDto implements Serializable {
         this.username = username;
     }
 
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
-    }
-
     public Integer getPlaceId() {
         return placeId;
     }
 
     public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
+    }
+
+    @Override
+    public String toString() {
+        return "ParkingTicketDto{" +
+                "username='" + username + '\'' +
+                ", placeId=" + placeId +
+                '}';
     }
 }
 

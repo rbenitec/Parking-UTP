@@ -8,6 +8,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ApiTicket {
-    @   POST("/ticket/created")
+    @POST("/ticket/created")
     Call<ticketGenerated> createParkingTicket(@Body ParkingTicketDto parkingTicketDto);
 }
