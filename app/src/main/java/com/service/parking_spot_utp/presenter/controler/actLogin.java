@@ -1,6 +1,8 @@
 package com.service.parking_spot_utp.presenter.controler;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,7 @@ public class actLogin extends AppCompatActivity {
     private EditText edtUsername;
     private EditText edtPassword;
     private static final String TAG = "actLogin";
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class actLogin extends AppCompatActivity {
         Button btnLogin = findViewById(R.id.loginButton);
         Button btnRegister = findViewById(R.id.registerButton);
 
+        sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -46,8 +51,7 @@ public class actLogin extends AppCompatActivity {
 
         Retrofit retrofit = RetrofitClient.getClient();
 
-        btnRegister.setOnClickListener(new View.OnClickListener(){
-
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(actLogin.this, actRegistro.class));
@@ -65,7 +69,6 @@ public class actLogin extends AppCompatActivity {
                     return;
                 }
 
-
                 ApiLogin login = retrofit.create(ApiLogin.class);
                 LoginRequest loginRequest = new LoginRequest(username, password);
                 Call<User> call = login.LOGIN_CALL(loginRequest);
@@ -78,14 +81,22 @@ public class actLogin extends AppCompatActivity {
                             System.out.println(user);
                             if (user.isValid()) {
 
+                                // Guardar datos en SharedPreferences
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean("valid", user.isValid());
+                                editor.putString("message", user.getMessage());
+                                editor.putString("username", user.getUsername());
+                                editor.putString("names", user.getNames());
+                                editor.putString("qr", user.getQr());
+                                editor.putString("vehiclePlaca", user.getVehicleDto().getPlaca());
+                                editor.putString("vehicleModelo", user.getVehicleDto().getModelo());
+                                editor.putString("vehicleType", user.getVehicleDto().getType());
+                                editor.apply();
+
                                 edtUsername.getText().clear();
                                 edtPassword.getText().clear();
 
-                                //intent.putExtra("username", user.getUsername());
-                                //intent.putExtra("password", user.getPassword());
-
                                 startActivity(new Intent(actLogin.this, actPrincipalUser.class));
-
 
                                 Toast.makeText(actLogin.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                             } else {

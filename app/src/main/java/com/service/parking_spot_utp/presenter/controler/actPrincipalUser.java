@@ -2,9 +2,11 @@ package com.service.parking_spot_utp.presenter.controler;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class actPrincipalUser extends AppCompatActivity {
     private TextView petitTextView;
     private TextView arequipaTextView;
     private TextView pacificoTextView;
+    private ImageView profileIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class actPrincipalUser extends AppCompatActivity {
         petitTextView = findViewById(R.id.Petit);
         arequipaTextView = findViewById(R.id.Arequipa);
         pacificoTextView = findViewById(R.id.Pacifico);
+        profileIcon = findViewById(R.id.profileIcon);
 
         Retrofit retrofit = RetrofitParking.getParking();
         ApiParking parkingService = retrofit.create(ApiParking.class);
@@ -79,6 +83,15 @@ public class actPrincipalUser extends AppCompatActivity {
 
         // Método para ocultar la barra de navegación
         hideSystemUI();
+
+        // Agregar OnClickListener al ImageView
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(actPrincipalUser.this, actProfile.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -1,15 +1,24 @@
 package com.service.parking_spot_utp.model.entity;
 
-public class User {
+import java.io.Serializable;
 
-    public boolean valid;
-    public String username;
+public class User implements Serializable {
 
-    public String password;
-    public String message;
+    private boolean valid;
+    private String message;
+    private String username;
+    private String names;
+    private String qr;
+    private Vehicle vehicleDto;
 
-    public String placa1;
-
+    public User(boolean valid, String message, String username, String names, String qr, Vehicle vehicleDto) {
+        this.valid = valid;
+        this.message = message;
+        this.username = username;
+        this.names = names;
+        this.qr = qr;
+        this.vehicleDto = vehicleDto;
+    }
 
     public boolean isValid() {
         return valid;
@@ -17,22 +26,6 @@ public class User {
 
     public void setValid(boolean valid) {
         this.valid = valid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getMessage() {
@@ -43,19 +36,35 @@ public class User {
         this.message = message;
     }
 
-    public String getPlaca1() {
-        return placa1;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPlaca1(String placa1) {
-        this.placa1 = placa1;
-    }
-
-    public User(boolean valid, String username, String password, String message, String placa1) {
-        this.valid = valid;
+    public void setUsername(String username) {
         this.username = username;
-        this.password = password;
-        this.message = message;
-        this.placa1 = placa1;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
+    }
+
+    public String getQr() {
+        return qr;
+    }
+
+    public void setQr(String qr) {
+        this.qr = qr;
+    }
+
+    public Vehicle getVehicleDto() {
+        return vehicleDto;
+    }
+
+    public void setVehicleDto(Vehicle vehicleDto) {
+        this.vehicleDto = vehicleDto;
     }
 }
