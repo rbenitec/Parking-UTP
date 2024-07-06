@@ -13,7 +13,7 @@ public class RetrofitTicket {
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.12:8100")
+                    .baseUrl("http://10.247.190.214:8100")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
